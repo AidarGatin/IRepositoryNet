@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DataLayer;
 using DataLayer.Entities;
+using DomainLayer;
 using DomainLayer.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,19 +17,24 @@ namespace WebApplication.Controllers
 	{
 		private EFDBContext _context;
 		private IDirectorysRepository _dirRep;
+		private DataManager _dataManager;
 
-		public HomeController	(EFDBContext context, IDirectorysRepository dirRep )
+		public HomeController	(EFDBContext context, IDirectorysRepository dirRep , DataManager dataManager)
 		{
 			_context = context;
 			_dirRep = dirRep;
+			_dataManager = dataManager;
 		}
 		public IActionResult Index()
 		{
 			HelloModel _model = new HelloModel() { HelloMessage = "Aidar!" };
 
-			//List<Directory> _dirs = _context.Directory.Include(x=>x.Materials).ToList();
-			List<Directory> _dirs = _dirRep.GetAllDirectorys().ToList(); 
-		 
+			//List<Directory> _dirs = _context.Directory.Include(x=>x.Materials).ToList(); // Get from Database context
+
+			//List<Directory> _dirs = _dirRep.GetAllDirectorys().ToList(); // Get from Repository
+
+			List<Directory> _dirs = _dataManager.Directorys.GetAllDirectorys(true).ToList(); //Get from DataManager 
+
 			return View(_dirs);
 		}
 

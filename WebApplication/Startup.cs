@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using DomainLayer;
 
 namespace WebApplication
 {
@@ -41,6 +42,8 @@ namespace WebApplication
 
 			services.AddTransient<IDirectorysRepository, EFDirectorysRepository>();
 			services.AddTransient<IMaterialsRepository, EFMaterialsRepository>();
+
+			services.AddScoped<DataManager>();
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 		}
