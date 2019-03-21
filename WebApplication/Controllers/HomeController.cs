@@ -26,8 +26,8 @@ namespace WebApplication.Controllers
 		{
 			HelloModel _model = new HelloModel() { HelloMessage = "Aidar!" };
 
-			List<Directory> _dirs = _context.Directory.Include(x=>x.Materials).ToList();
-			//List<Directory> _dirs = _dirRep.GetAllDirectorys().ToList(); 
+			//List<Directory> _dirs = _context.Directory.Include(x=>x.Materials).ToList();
+			List<Directory> _dirs = _dirRep.GetAllDirectorys().ToList(); 
 		 
 			return View(_dirs);
 		}

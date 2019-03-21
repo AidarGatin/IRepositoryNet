@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DataLayer;
+using DomainLayer.Interfaces;
+using DomainLayer.Implementations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -36,6 +38,9 @@ namespace WebApplication
 			var connection = Configuration.GetConnectionString("DefaultConnection");
 
 			services.AddDbContext<EFDBContext>(options => options.UseSqlServer(connection, b => b.MigrationsAssembly("DataLayer")));
+
+			services.AddTransient<IDirectorysRepository, EFDirectorysRepository>();
+			services.AddTransient<IMaterialsRepository, EFMaterialsRepository>();
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 		}

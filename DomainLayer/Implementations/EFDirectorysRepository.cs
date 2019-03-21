@@ -9,7 +9,7 @@ using System.Text;
 
 namespace DomainLayer.Implementations
 {
-	class EFDirectorysRepository : IDirectorysRepository
+	public class EFDirectorysRepository : IDirectorysRepository
 
 	{
 		private EFDBContext context;
