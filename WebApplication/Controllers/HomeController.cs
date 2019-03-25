@@ -9,6 +9,8 @@ using DomainLayer;
 using DomainLayer.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PresentationLayer;
+using PresentationLayer.Model;
 using WebApplication.Models;
 
 namespace WebApplication.Controllers
@@ -18,12 +20,14 @@ namespace WebApplication.Controllers
 		private EFDBContext _context;
 		private IDirectorysRepository _dirRep;
 		private DataManager _dataManager;
+		private ServicesManager _servicesmanager;
 
 		public HomeController	(EFDBContext context, IDirectorysRepository dirRep , DataManager dataManager)
 		{
 			_context = context;
 			_dirRep = dirRep;
-			_dataManager = dataManager;
+			//_dataManager = dataManager;
+			_servicesmanager = new ServicesManager(_dataManager); 
 		}
 		public IActionResult Index()
 		{
@@ -33,7 +37,10 @@ namespace WebApplication.Controllers
 
 			//List<Directory> _dirs = _dirRep.GetAllDirectorys().ToList(); // Get from Repository
 
-			List<Directory> _dirs = _dataManager.Directorys.GetAllDirectorys(true).ToList(); //Get from DataManager 
+			//List<Directory> _dirs = _dataManager.Directorys.GetAllDirectorys(true).ToList(); //Get from DataManager 
+
+			List<DirectoryViewModel> _dirs = _servicesmanager.Directorys.GetDirectoryesList(); //Get from DataBase converted  
+
 
 			return View(_dirs);
 		}
