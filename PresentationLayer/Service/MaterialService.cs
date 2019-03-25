@@ -8,7 +8,7 @@ using System.Text;
 
 namespace PresentationLayer.Service
 {
-	class MaterialService
+	public class MaterialService
 	{
 		private DataManager dataManager;
 		public MaterialService(DataManager dataManager)
@@ -31,7 +31,7 @@ namespace PresentationLayer.Service
 			return _model;
 		}
 
-		public MaterialEditModel GetMaterialEdetModel(int materialId)
+		public MaterialEditModel GetMaterialEditModel(int materialId)
 		{
 			var _dbModel = dataManager.Materials.GetMaterialById(materialId);
 			var _editModel = new MaterialEditModel()

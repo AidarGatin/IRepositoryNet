@@ -7,7 +7,7 @@ using System.Text;
 
 namespace PresentationLayer.Service
 {
-	class DirectoryService
+	public class DirectoryService
 	{
 		private DataManager _dataManager;
 		private MaterialService _materialService;
