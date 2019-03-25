@@ -43,7 +43,7 @@ namespace PresentationLayer.Service
 			}
 			return new DirectoryViewModel() { Directory = _directory, Materials = _materialsViewModelList };
 		}
-		public DirectoryEditModel GetDirectoryEdetModel(int directoryid = 0)
+		public DirectoryEditModel GetDirectoryEditModel(int directoryid = 0)
 		{
 			if (directoryid != 0)
 			{

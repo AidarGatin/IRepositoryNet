@@ -58,7 +58,9 @@ namespace PresentationLayer.Service
 			material.Title = editModel.Title;
 			material.Html = editModel.Html;
 			material.DirectoryId = editModel.Directoryid;
+
 			dataManager.Materials.SaveMaterial(material);
+
 			return MaterialDBModelToView(material.Id);
 		}
 		public MaterialEditModel CreateNewMaterialEditModel(int directoryId)
