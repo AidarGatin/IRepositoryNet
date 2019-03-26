@@ -26,7 +26,7 @@ namespace WebApplication.Controllers
 		{
 			_context = context;
 			_dirRep = dirRep;
-			//_dataManager = dataManager;
+			_dataManager = dataManager;
 			_servicesmanager = new ServicesManager(_dataManager); 
 		}
 		public IActionResult Index()

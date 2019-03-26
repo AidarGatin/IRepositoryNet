@@ -23,7 +23,7 @@ namespace DataLayer
 		public EFDBContext CreateDbContext(string[] args)
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<EFDBContext>();
-			optionsBuilder.UseSqlServer("Server=PACIFIC\\PACIFIC;Database=TestBlogASPCoreDb;Trusted_Connection=True;MultipleActiveResultSets=true", b => b.MigrationsAssembly("DataLayer"));
+			optionsBuilder.UseSqlServer("Server=(LocalDB)\\localDB;Database=TestBlogASPCoreDb;Trusted_Connection=True;MultipleActiveResultSets=true", b => b.MigrationsAssembly("DataLayer"));
 
 			return new EFDBContext(optionsBuilder.Options);
 		}

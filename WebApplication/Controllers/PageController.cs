@@ -12,12 +12,12 @@ namespace WebApplication.Controllers
 {
 	public class PageController : Controller
 	{
-		private DataManager _datamanager;
+		private DataManager _dataManager;
 		private ServicesManager _servicemanager;
 
 		public PageController(DataManager dataManager)
 		{
-			_datamanager = dataManager;
+			_dataManager = dataManager;
 			_servicemanager = new ServicesManager(dataManager);
 
 		}
@@ -40,7 +40,7 @@ namespace WebApplication.Controllers
 			PageEditModel _editModel;
 			switch (pageType)
 			{
-				case PageType.Directory: _editModel =_servicemanager.Directorys.GetDirectoryEditModel(pageId); break;
+				case PageType.Directory: _editModel =_servicemanager.Directorys.GetDirectoryEdetModel(pageId); break;
 				case PageType.Material: _editModel = _servicemanager.Materials.GetMaterialEditModel(pageId); break;
 				default: _editModel = null;  break;
 			}
