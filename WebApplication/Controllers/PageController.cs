@@ -35,17 +35,40 @@ namespace WebApplication.Controllers
 			return View(_viewModel);
 		}
 
-		public IActionResult PageEditor( int pageId, PageType pageType)
-		{
-			PageEditModel _editModel;
-			switch (pageType)
-			{
-				case PageType.Directory: _editModel =_servicemanager.Directorys.GetDirectoryEdetModel(pageId); break;
-				case PageType.Material: _editModel = _servicemanager.Materials.GetMaterialEditModel(pageId); break;
-				default: _editModel = null;  break;
-			}
-			ViewBag.PageType = pageType;
-			return View(_editModel);
-		}
-	}
+    [HttpGet]
+    public IActionResult PageEditor(int pageId, PageType pageType, int directoryId = 0)
+    {
+      PageEditModel _editModel;
+
+      switch (pageType)
+      {
+        case PageType.Directory:
+          if (pageId != 0) _editModel = _servicemanager.Directorys.GetDirectoryEdetModel(pageId);
+          else _editModel = _servicemanager.Directorys.CreateNewDirectoryEditModel();
+          break;
+        case PageType.Material:
+          if (pageId != 0) _editModel = _servicemanager.Materials.GetMaterialEditModel(pageId);
+          else _editModel = _servicemanager.Materials.CreateNewMaterialEditModel(directoryId);
+          break;
+        default: _editModel = null; break;
+      }
+
+      ViewBag.PageType = pageType;
+      return View(_editModel);
+    }
+
+    [HttpPost]
+    public IActionResult SaveDirectory(DirectoryEditModel model)
+    {
+      _servicemanager.Directorys.SaveDirectoryEditModelToDb(model);
+      return RedirectToAction("PageEditor", "Page", new { pageId = model.Id, pageType = PageType.Directory });
+    }
+
+    [HttpPost]
+    public IActionResult SaveMaterial(MaterialEditModel model)
+    {
+      _servicemanager.Materials.SaveMaterialEditModelToDb(model);
+      return RedirectToAction("PageEditor", "Page", new { pageId = model.Id, pageType = PageType.Material });
+    }
+  }
 }
